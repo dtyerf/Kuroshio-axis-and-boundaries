@@ -13,7 +13,7 @@ depth = double(mdata.depth);
 kuroshio_data = struct();
 load('mask.mat');
 
-pre = 0.25;
+pre = 0.125;
 domain = [115, 132; 15, 32];
 start_longitudes = domain(1,1):pre:domain(1,2);
 start_latitudes  = domain(2,1):pre:domain(2,2);
@@ -38,10 +38,11 @@ starts = starts(is_sea, :);
 min_loop_points = 8;
 distance_threshold = 0.15;
 
-tol = 0.125;
+tol = 0.5;
 cs=30;
 for yearIdx = 1993:2024
      data_path = sprintf('%d.mat', yearIdx);
+     mdata = matfile(data_path,'Writable',false);
   days = sum(eomday(yearIdx,1:12));
 
 if ~isfile(sprintf('kuroshio_%d.mat', yearIdx))
